@@ -49,22 +49,44 @@ const restaurant = {
   },
 };
 
-// restaurant.numGuests = 0;
-const guests = restaurant.numGuests || 10;
-console.log(guests);
+const rest1 = {
+  name: "Capri",
+  numGuests: 20,
+};
 
-// Nullish Coalescing operator
-// Nullish : null and undefined (NOT 0 or '')
-const guestsCorrect = restaurant.numGuests ?? 10;
-// Only if the restaurant.numGuests is null or undefined then the second operand would be executed and returned.
-console.log(guestsCorrect);
-// Suppose restaurant.numGuests = 0 and it's not a nullish value, so the evaluation here is short-circuited, and the immediately the first non-nullish value is returned.
+const rest2 = {
+  name: "La Piazza",
+  owner: "Giovanni Rossi",
+};
 
-console.log(0 ?? "Jonas"); // 0
-console.log(undefined ?? "Jonas"); // "Jonas"
-console.log(null ?? "Jonas"); // "Jonas"
-console.log(7 ?? "Jonas"); // 7
-console.log(undefined ?? null); // null
-console.log(null ?? undefined); // undefined
-console.log(0 ?? undefined); // 0
-console.log(0 ?? null); // 0
+rest1.numGuests = rest1.numGuests || 10;
+rest2.numGuests = rest2.numGuests || 10;
+console.log(rest1.numGuests, rest2.numGuests);
+
+// Using OR Assignment Operator
+rest1.numGuests ||= 10;
+rest2.numGuests ||= 10;
+console.log(rest1.numGuests, rest2.numGuests);
+
+// Kind of error
+const rest3 = {
+  name: "Gigi Paris",
+  numGuests: 0,
+};
+
+// rest3.numGuests ||= 20;  // As rest3.numGuests is 0, the falsy value. So it assigned to 20
+// console.log(rest3.numGuests);
+
+// Fix using Nullish Assignment Operator
+rest3.numGuests ??= 20;
+console.log(rest3.numGuests);
+
+// AND
+rest1.owner = rest1.owner && "<anonymous>";
+console.log(rest1.owner);
+rest2.owner = rest2.owner && "<anonymous>";
+console.log(rest2.owner);
+
+rest1.owner &&= "<anonymous>";
+rest2.owner &&= "<anonymous>";
+console.log(rest1.owner, rest2.owner);
